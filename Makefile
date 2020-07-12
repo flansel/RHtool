@@ -14,7 +14,7 @@ ifeq ($(SANITIZE), 1)
  CFLAGS += -fsanitize=address -fsanitize=leak -fsanitize=undefined
 endif
 
-PROGRAMS=rhel-log-parser rhel-ff-mttest
+PROGRAMS=rhel-log-parser rhel-find-fixes-merge-search
 OBJECTS=asprintf.o
 
 .PHONY: all
