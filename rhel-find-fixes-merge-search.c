@@ -627,6 +627,7 @@ void match_and_filter_fixes(list_t *rhel_list, list_t *upstream, list_t *fixes)
 	}
 }
 
+
 char* write_file(FILE* f)
 {
 	char* rhel_log = malloc(sizeof(char)*100);
@@ -699,7 +700,7 @@ commit_data_t* get_fix(list_t fixes, int index){
 	return node->data;
 }
 
-inline void __print_fix(commit_data_t* fix){
+inline void print_fix(commit_data_t* fix){
 	printf("%.*s %s\n%s\n",HASH_SZ-1,fix->id,fix->summary,fix->rhel_log);
 }
 
@@ -740,7 +741,7 @@ void* check_rhel_log(void* arg){
 		}else{
 			printf("FAILED popen\n");
 		}
-		__print_fix(fix);
+		print_fix(fix);
 		pthread_mutex_lock(&lock);
 	}
 	pthread_mutex_unlock(&lock);
