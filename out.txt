@@ -1,0 +1,189 @@
+Creating thread
+starting upstream
+Inside load_upstream../rhel7/
+v3.10..HEAD
+starting rhel
+Inside load_rheldone with rhel
+Done Loading upstream
+Done with git stuff
+cb361d8cdef69990f6b4504dc1fd9a594d983c97 sched/fair: Use RCU accessors consistently for ->numa_group
+16d51a590a8ce3befb1308e0e7ab77f3b661af33 sched/fair: Don't free p->numa_faults with concurrent readers
+75df6e688ccd517e339a7c422ef7ad73045b18a2 tracing: Fix trace_pipe behavior for instance traces
+2448e3493cb3874baa90725c87869455ebf11cd2 tracing: instance_rmdir() leaks ftrace_event_file->filter
+af2e859edd477fa1ea3d1d106f41a595cff3d162 locking/ww_mutex: Fix compilation of __WW_MUTEX_INITIALIZER
+d9c1bb2f6a2157b38e8eb63af437cb22701d31ee perf/core: Restore mmap record type correctly
+ab3f5faa6255a0eb4f832675507d9e295ca7e9ba cgroup: use an ordered workqueue for cgroup destruction
+55a3235fc71bf34303e34a95eeee235b2d2a35dd signal: Properly deliver SIGILL from uprobes
+51fbf14f2528a8c6401290e37f1c893a2412f1d3 x86/kexec: Correct KEXEC_BACKUP_SRC_END off-by-one error
+913a90bc5a3a06b1f04c337320e9aeee2328dd77 perf/ioctl: Add check for the sample_period value
+1860033237d4be09c5d7382585f0c7229367a534 mm: make PR_SET_THP_DISABLE immediately active
+00cc1633816de8c95f337608a1ea64e228faf771 sched: access local runqueue directly in single_task_running
+0361748f3b4a1cd73657a0a44fc3bc71ea30e8eb ARM: 8371/1: always select IRQ_WORK on SMP
+e84b4a84e52d4cd8770b4242cd09df0133333f63 PM / QoS: Fix memory leak on resume_latency.notifiers
+8844aad89ed61545b4db6a3467e1b21ca1c49460 genirq: Fix memory leak when calling irq_free_hwirqs()
+fcfc2aa0185f4a731d05a21e9f359968fdfd02e7 ptrace: take into account saved_sigmask in PTRACE{GET,SET}SIGMASK
+a9e73998f9d705c94a8dca9687633adc0f24a19a kernel/sys.c: prctl: fix false positive in validate_prctl_map()
+4ebbda5251374d532ba8939de4241d769d1420b6 hrtimer: Make __hrtimer_get_next_event() static
+e10abb2f770eeb673d23c19980216b0fb62b4f50 x86_64/traps: Fix always true condition
+8a58ddae23796c733c5dfbd717538d89d036c5bd perf/core: Fix exclusive events' grouping
+699c12a7cca376d16f75672f9047faa37b184eda perf intel-pt: Update documentation about context switch events
+1424a09a9e1839285e948d4ea9fdfca26c9a2086 perf/x86: fix PEBS issues on Intel Atom/Core2
+9c1645727b8fa90d07256fdfcc45bf831242a3ab timekeeping_Force_unsigned_clocksource_to_nanoseconds_conversion
+8a7a8e1eab929eb3a5b735a788a23b9731139046 timekeeping: Eliminate the stale declaration of ktime_get_raw_and_real_ts64()
+85c2dd5473b2718b4b63e74bfeb1ca876868e11f pipe: actually allow root to exceed the pipe buffer limits
+4d1f0fb096aedea7bb5489af93498a82e467c480 kernel/watchdog: use nmi registers snapshot in hardlockup handler
+a4ae32c71fe90794127b32d26d7ad795813b502e exec: Always set cap_ambient in cap_bprm_set_creds
+2bdce74412c249ac01dfe36b6b0043ffd7a5361e mm: fix devmem_is_allowed() for sub-page System RAM intersections
+000a7d66ec30898f46869be01ab8205b056385d0 kernel/printk/printk.c: fix faulty logic in the case of recursive printk
+ef947b2529f918d9606533eb9c32b187ed6a5ede x86, mm: fix gup_pte_range() vs DAX mappings
+c45442055dfdeb265cc20c9eeaa9fd11a75fbf51 nvdimm: use 'u64' for pfn flags
+10a0cd6e4932b5078215b1ec2c896597eec0eff9 mm: Fix memory size alignment in devm_memremap_pages_release()
+49f17c26c123b60fd1c74629eef077740d16ffc2 resource: fix locking in find_next_iomem_res()
+09edea4f8fdeb4e292b80d493296070f5ec64e6e ARM: 8410/1: VDSO: fix coarse clock monotonicity regression
+188e3c5cd2b672620291e64a21f1598fe91e40b6 tty: provide tty_name() even without CONFIG_TTY
+fa07ab72cbb0d843429e61bf179308aed6cbe0dd genirq: Release resources in __setup_irq() error path
+50268a3d266ecfdd6c5873d62b2758d9732fc598 tracing/uprobe_event: Fix strncpy corner case
+cb9d7fd51d9fbb329d182423bd7b92d0f8cb0e01 watchdog: Mark watchdog touch functions as notrace
+5b71388663c0920848c0ee7de946970a2692b76d audit: Fix wrong task in comparison of session ID
+b6a32f023fcc9cbd1602f78a467fd8d41bbc9457 perf/x86: Fix PEBS threshold initialization
+5eb7c0d04f04a667c049fe090a95494a8de2955c taint/module: Fix problems when out-of-kernel driver defines true or false
+194c2c74f5532e62c218adeb8e2b683119503907 tracing: Get trace_array reference for available_tracers files
+db9108e054700c96322b0f0028546aa4e643cf0b tracing: Fix kmemleak in instance_rmdir
+9a0fd675304d410f3a9586e1b333e16f4658d56c tracing: Fix missing tab for hwlat_detector print format
+384632e67e0829deb8015ee6ad916b180049d252 userfaultfd: non-cooperative: fix fork use after free
+add7c65ca426b7a37184dd3d2172394e23d585d6 pid: fix lockdep deadlock warning due to ucount_lock
+2ed6afdee798658fe3c33b50c4a79d1bde45f1d8 netns: move {inc,dec}_net_namespaces into #ifdef
+a9f2a846f0503e7d729f552e3ccfe2279010fe94 mm, slab: reschedule cache_reap() on the same CPU
+49cd53bf14aeb471c4a2682300dfc05ef2fd09f2 mm/pkeys: Fix siginfo ABI breakage caused by new u64 field
+536bd00cdbb7b908573e5a93bae67b64cbae60d8 sched/fair: Fix !CONFIG_SMP kernel cpufreq governor breakage
+eb0dc47ab6810c432e8193beccd9905ba0db8b22 genirq: Fix missing irq allocation affinity hint
+3adfb572f2978a980b250a9e1a56f84f3a031001 PCI/MSI: Return failure when msix_setup_entries() fails
+02e184476eff848273826c1d6617bb37e5bcc7ad perf/core: Force USER_DS when recording user stack data
+f4474c9f0bba17857b1a47c8dc89c07a0845c2b2 x86/dumpstack: Handle NULL stack pointer in show_trace_log_lvl()
+2d0af2247906cf17cd641cdb16444a8f291cd4f4 s390/kexec: fix update of os_info crash kernel size
+2700fefdb2d9751c416ad56897e27d41e409324a x86_64: Add gap to int3 to allow for call emulation
+977c1f9c8c022d0173181766b34a0db3705265a4 ftrace: Ignore FTRACE_FL_DISABLED while walking dyn_ftrace records
+6454b3bdd138dfc640deb5e7b9a0668fca2d55dd x86/stacktrace: Make zombie stack traces reliable
+f23d74f6c66c3697e032550eeef3f640391a3a7d x86/mm: Rework wbinvd, hlt operation in stop_this_cpu()
+3181c38e4df257852a0c0a53552fd5c869402886 kernel/sysctl.c: remove duplicate UINT_MAX check on do_proc_douintvec_conv()
+b3a0066005821acdc0cdb092cb72587182ab583f dnotify: Handle errors from fsnotify_add_mark_locked() in fcntl_dirnotify()
+d90a10e2444ba5a351fa695917258ff4c5709fa5 fsnotify: Fix fsnotify_mark_connector race
+721fb6fbfd2132164c2e8777cc837f9b2c1794dc fsnotify: Fix busy inodes during unmount
+0d6ec079d6aaa098b978d6395973bb027c752a03 fsnotify: pin both inode and vfsmount mark
+8c6cf9cc829fcd0b179b59f7fe288941d0e31108 mnt: Modify fs_fully_visible to deal with locked ro nodev and atime
+01c313dded34a16ef69e3972ceca687ba8a7cdf2 kallsyms: fix building without printk
+93949bb21b52aae924fd26f9775c8655dd9e885e mm: don't prepare anon_vma if vma has VM_WIPEONFORK
+1cf8dfe8a661f0462925df943140e9f6d1ea5233 perf/core: Fix race between close() and fork()
+7fa343b7fdc4f351de4e3f28d5c285937dd1f42f perf/core: Fix corner case in perf_rotate_context()
+d0023a1448abdcc892b8bca631e74bb1888efd02 timer: Write timer->flags atomically
+b7019ac550eb3916f34d79db583e9b7ea2524afa drm/nouveau: fix bogus GPL-2 license header
+8ccc7d6bad84bebf1f1a6364d1fa04d3d7b575f6 seccomp: Remove 2-phase API documentation
+e4a8ca3baa5557fa54557d42b5910ed0d3316922 /proc/module: fix building without kallsyms
+dbb7ee0e474cc8221de55583f516275693c5b552 lib: move strncpy_from_unsafe() into mm/maccess.c
+266a0a790fb545fa1802a899ac44f61b1d6335a7 bpf: avoid warning for wrong pointer cast
+eb1b66887472eaa7342305b7890ae510dd9d1a79 bpf: Make use of probe_user_write in probe write helper
+41703a731066fde79c3e5ccf3391cf77a98aeda5 bpf: add bpf_clone_redirect to bpf_helper_changes_pkt_data
+e2d2afe15ed452f91797a80dbc0a17838ba03ed4 bpf: fix states equal logic for varlen access
+d2a4dd37f6b41fbcad76efbf63124eb3126c66fe bpf: fix state equivalence
+0eb6984f70005e792917d9e51142a57f79b32c91 bpf, test_verifier: fix a test case error result on unprivileged
+2874aa2e467dbc0b4f7cb0ee5dc872e98e000a47 bpf: Fix compilation warning in __bpf_lru_list_rotate_inactive
+50b045a8c0ccf44f76640ac3eea8d80ca53979a3 bpf, lru: avoid messing with eviction heuristics upon syscall lookup
+71eb5255f55bdb484d35ff7c9a1803f453dfbf82 bpf: use GFP_ATOMIC instead of GFP_KERNEL in bpf_parse_prog()
+f1f7714ea51c56b7163fb1a5acf39c6a204dd758 bpf: rework prog_digest into prog_tag
+ff1c08e1f74b6864854c39be48aa799a6a2e4d2b bpf: Change size to u64 for bpf_map_{area_alloc, charge_init}()
+6ae08ae3dea2cfa03dd3665a3c8475c2d429ef47 bpf: Add probe_read_{user, kernel} and probe_read_{user, kernel}_str helpers
+d140199af510ad4749dc5e38b7922135258ba5fd bpf, lpm: fix kfree of im_node in trie_update_elem
+fad73a1a35ea61f13607a391aca669caad8c04ca bpf: Fix and simplifications on inline map lookup
+cd36c3a21a400cac9c457394b9adf94e0027c136 bpf: fix map value attribute for hash of maps
+6e6fddc78323533be570873abb728b7e0ba7e024 bpf: fix panic due to oob in bpf_prog_test_run_skb
+930651a75bf1ba6893a8b8475270664ebdb6cf4a bpf: do not disable/enable BH in bpf_map_free_id()
+781e62823cb81b972dc8652c1827205cda2ac9ac bpf: decrease usercnt if bpf_map_new_fd() fails in bpf_map_get_fd_by_id()
+89b096898a8450b0a5b97d521e000ae9f94f81f9 bpf: don't indicate success when copy_from_user fails
+1ad2f5838d345e1c102bd1cd27c4f4c1349b0dc8 bpf: fix incorrect pruning decision when alignment must be tracked
+721e08dad17e226ef68819d0a23dc53c25fe8ea5 bpf: Fix compiler warning on info.map_ids for 32bit platform
+241a974ba2c0d98e2104012cb80ed4494c0e66a7 bpf: dev_map_alloc() shouldn't return NULL
+96e5ae4e76f1ea950d493f510399b49308bea731 bpf: fix numa_node validation
+8007e40a24e12d35189203370268c7278f29ab74 bpf: Fix out-of-bound access on interpreters[]
+e2f7fc0ac6957cabff4cecf6c721979b571af208 bpf: fix undefined behavior in narrow load handling
+2ed46ce45ec02f6b2188419acdf372a144e06fb5 bpf: fix two missing target_size settings in bpf_convert_ctx_access
+1b688a19a92223cf2d1892c9d05d64dc397b33e3 bpf/verifier: remove varlen_map_value_access flag
+4374f256ce8182019353c0c639bb8d0695b4c941 bpf/verifier: fix bounds calculation on BPF_RSH
+fb2a311a31d3457fe8c3ee16f5609877e2ead9f7 bpf: fix off by one for range markings with L{T, E} patterns
+1ab2de2bfed3ab2073ed1e7afa2b1134930d2b70 bpf: fix liveness propagation to parent in spilled stack slots
+7c0cdf0b3940f63d9777c3fcf250a2f83859ca54 bpf, lpm: fix lookup bug in map_delete_elem
+2d17d8d79e77ff3f1b35b87522fc72fa562260ff xdp: linearize skb in netif_receive_generic_xdp()
+7863f46bac3a1716f7d547c53f367ddf509f031e bpf: Fix tcp_synrto_kern.c sample program
+f005afede992e265bb98534b86912bb669ccd0d2 trace/bpf: remove helper bpf_perf_prog_read_value from tracepoint type programs
+040ee69226f8a96b7943645d68f41d5d44b5ff7d fix "netfilter: xt_bpf: Fix XT_BPF_MODE_FD_PINNED mode of 'xt_bpf_info_v1'"
+eba0c929d1d0f16c4b03628b7bf8ce363b9e5c9a bpf: fix out-of-bounds access warning in bpf_check
+7cce782ef32f5003c18ab8f9f586f2ed5ce2c33e bpf: fix link error without CONFIG_NET
+1969db47f8d0e800397abd4ee4e8d27d2b578587 bpf: fix verifier memory leaks
+eb33f2cca49ec49a1b893b5af546e7c042ca6365 bpf: remove explicit handling of 0 for arg2 in bpf_probe_read
+a23f06f06dbe54696e8d4f156b317e8c9961c345 bpf: fix build issues on um due to mising bpf_perf_event.h
+afd594240806acc138cf696c09f2f4829d55d02f bpf: fix off-by-one error in adjust_subprog_starts
+70a87ffea8acc390ae315fa1930e849f656bdb88 bpf: fix maximum stack depth tracking logic
+fd05e57bb35ad5eb7e261b64e5cf46445250f842 bpf: fix stacksafe exploration when comparing states
+4f74d80971bce93d9e608c40324d662c70eb4664 bpf: fix kallsyms handling for subprogs
+b799207e1e1816b09e7a5920fbb2d5fcf6edd681 bpf: 32-bit RSH verification must truncate input before the ALU op
+2b36047e7889b7efee22c11e17f035f721855731 selftests/bpf: fix test_align
+bbeb6e4323dad9b5e0ee9f60c223dd532e2403b1 bpf, array: fix overflow in max_entries and undefined behavior in index_mask
+09584b406742413ac4c8d7e030374d4daa045b69 bpf: fix selftests/bpf test_kmod.sh failure when CONFIG_BPF_JIT_ALWAYS_ON=y
+2310035fa03f651dd5b03f19a26a97512aa8842c bpf: fix incorrect kmalloc usage in lpm_trie MAP_GET_NEXT_KEY rcu region
+1612a981b76688c598dc944bbfbe29a2b33e3973 bpf, x64: fix JIT emission for dead code
+6c5f61023c5b0edb0c8a64c902fe97c6453b1852 bpf: fix rcu lockdep warning for lpm_trie map_free callback
+fb6bab6a5ad46d00b5ffa22268f21df1cd7c59df tracing/uprobes: Fix the usage of uprobe_buffer_enable() in probe_event_enable()
+e5e96fafd9028b1478b165db78c52d981c14f471 sched/topology: Set correct NUMA topology type
+167f5594b5efa20a26ff03b3424f793887e6b448 kernel/memremap: Remove stale devres_free() call
+31c5bda3a656089f01963d290a40ccda181f816e mm: fix exports that inadvertently make put_page() EXPORT_SYMBOL_GPL
+33491588c1fb2c76ed114a211ad0ee76c16b5a0c kernel/bpf/syscall: fix warning defined but not used
+beaf3d1901f4ea46fbd5c9d857227d99751de469 bpf: fix panic in stack_map_get_build_id() on i386 and arm32
+d29ab6e1fa21ebc2a8a771015dd9e0e5d4e28dc1 bpf: bpf_prog_array_alloc() should return a generic non-rcu pointer
+c8c088ba0edf65044c254b96fc438c91914aaab0 bpf: set maximum number of attached progs to 64 for a single perf tp
+0911287ce32b14fbc8aab0083151d9b54254091c bpf: fix bpf_prog_array_copy_to_user() issues
+f4e2298e63d24bb7f5cf0f56f72867973cb7e652 bpf/tracing: fix kernel/events/core.c compilation error
+5da13ab8b0dcaa984c45ae43edf5a4d148603d42 perf/core: Fix perf_kprobe_init()
+32e6e967fb36bf77ed99221ae3ce1909f045d8f9 perf/core: Need CAP_SYS_ADMIN to create k/uprobe with perf_event_open()
+83540fbc8812a580b6ad8f93f4c29e62e417687e tracing/perf: Use strndup_user() instead of buggy open-coded version
+ef0491ea17f8019821c7e9c8e801184ecf17f85a ARM: Hide finish_arch_post_lock_switch() from modules
+9275b933d409d3a4efa08102ca813557b93fb0b9 resource: Fix resource_size.cocci warnings
+68e7a4d66b0ce04bf18ff2ffded5596ab3618585 sched/vtime: Fix guest/system mis-accounting on task switch
+9d876e79df6a2f364b9f2737eacd72ceb27da53a bpf: fix unlocking of jited image when module ronx not set
+e20d3a055a457a10a4c748ce5b7c2ed3173a1324 bpf, offload: Replace bitwise AND by logical AND in bpf_prog_offload_info_fill
+79552fbc0f9dc20dc022be7cc48eb3761623fa56 bpf: fix formatting for bpf_get_stack() helper doc
+100605035e151c187360670c1776fb684808f145 bpf: Verifier, do_refine_retval_range may clamp umin to 0 incorrectly
+0af2ffc93a4b50948f9dad2786b7f1bd253bf0b9 bpf: Fix incorrect verifier simulation of ARSH under ALU32
+dc3b8ae9d271897e09b27fa4e4e0000de98590d1 bpf: avoid -Wmaybe-uninitialized warning
+28c2fae726bf5003cd209b0d5910a642af98316f bpf: fix bpf_prog_get_info_by_fd to return 0 func_lens for unpriv
+cd7455f1013ef96d5cbf5c05d2b7c06f273810a6 bpf: Fix use after free in subprog's jited symbol removal
+4d31f30148cea6e97e42616231eed55295117fe7 bpf: don't set id on after map lookup with ptr_to_map_val return
+03eeafdd9ab06a770d42c2b264d50dff7e2f4eee locking/rwsem: Fix up_read_non_owner() warning with DEBUG_RWSEMS
+de53fd7aedb100f03e5d2231cfce0e4993282425 sched/fair: Fix low cpu usage with high throttling by removing expiration of cpu-local slices
+4766ab5677a2842834f9bc4a21587256a811531c locking/lockdep: Remove duplicated 'lock_class_ops' percpu array
+9fb8d5dc4b649dd190e1af4ead670753e71bf907 stop_machine: Disable preemption when waking two stopper threads
+2610e88946632afb78aa58e61f11368ac4c0af7b stop_machine: Disable preemption after queueing stopper threads
+2519c1bbe38d7acacc9aacba303ca6f97482ed53 tracing: Quiet gcc warning about maybe unused link variable
+80d20d35af1edd632a5e7a3b9c0ab7ceff92769e nohz: Fix local_timer_softirq_pending()
+339bc4183596e1f68c2c98a03b87aa124107c317 perf/ring_buffer: Fix AUX record suppression
+4fe7ffb7e17ca6ad9173b8de35f260c9c8fc2f79 genirq: Fix null pointer reference in irq_set_affinity_hint()
+2f993cf093643b98477c421fa2b9a98dcc940323 perf: Fix ring_buffer_attach() RCU sync, again
+d3bd7413e0ca40b60cf60d4003246d067cafdeda bpf: fix sanitation of alu op with pointer / scalar type from different paths
+4929a4e6faa0f13289a67cae98139e727f0d4a97 sched/fair: Scale bandwidth quota and period without losing quota/period ratio precision
+34d66caf251df91ff27b24a3a786810d29989eca x86/speculation: Remove redundant arch_smt_update() invocation
+1bf72720281770162c87990697eae1ba2f1d917a cpu/speculation: Warn on unsupported mitigations= parameter
+5d603311615f612320bb77bd2a82553ef1ced5b7 kernel/module.c: wakeup processes in module_wq on module unload
+472de49fdc53365c880ab81ae2b5cfdd83db0b06 perf/x86/intel: Disallow precise_ip on BTS events
+9002b21465fa4d829edfc94a5a441005cffaa972 kernel/sysctl.c: fix out-of-bounds access when setting file-max
+c4ea95d7cd08d9ffd7fa75e6c5e0332d596dd11e mm: fix anon_vma_clone() error treatment
+54d27365cae88fbcc853b391dcd561e71acb81fa sched/fair: Prevent throttling in early pick_next_task_fair()
+3f1d2a318171bf61850d4e5a72031271e5aada76 sched: Fix hotplug task migration
+0782e63bc6fe7e2d3408d250df11d388b7799c6b sched: Handle priority boosted tasks proper in setscheduler()
+896bbb2522587e3b8eb2a0d204d43ccc1042a00d sched/core: Allow __sched_setscheduler() in interrupts when PI is not used
+619bd4a71874a8fd78eb6ccf9f272c5e98bcc7b7 sched/rt: Add a missing rescheduling point
+c4159a75b64c0e67caededf4d7372c1b58a5f42a mm: memcontrol: only mark charged pages with PageKmemcg
+f7b8a47da17c9ee4998f2ca2018fcc424e953c0e sched: Remove lockdep check in sched_move_task()
+763a9ec06c409dcde2a761aac4bb83ff3938e0b3 sched/fair: Fix -Wunused-but-set-variable warnings
+75718584cb3c64e6269109d4d54f888ac5a5fd15 ptp: free ptp device pin descriptors properly
+70c8217acd4383e069fe1898bbad36ea4fcdbdcc tracing: Handle NULL formats in hold_module_trace_bprintk_format()
+2967acbb257a6a9bf912f4778b727e00972eac9b blktrace: fix trace mutex deadlock
+153031a301bb07194e9c37466cfce8eacb977621 blktrace: fix dereference after null check
+Time taken 54 seconds 104 milliseconds
