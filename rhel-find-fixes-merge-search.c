@@ -40,8 +40,7 @@
 #define MAX_THREADS     4
 
 //TODO ask how is best way to not use this global
-
-int thread_index = 0; 
+ 
 pthread_mutex_t lock;
 
 typedef struct lnode lnode_t;
@@ -687,6 +686,7 @@ void create_file(char* command, char* hash)
 typedef struct log_args{
 	char*rhel_repo;
 	char*upstream_repo;
+	int* thread_index;
 	list_t fixes;
 }log_args_t;
 
@@ -708,11 +708,12 @@ void* check_rhel_log(void* arg){
 	log_args_t* args = (log_args_t*)arg;
 	char* rhel_path = args->rhel_repo;
 	char* upstream_path = args->upstream_repo;
+	int* thread_index = args->thread_index;
 	list_t fixes = args->fixes;
 	commit_data_t* fix;
 	FILE* output;
-	char* command = malloc(sizeof(char)*200);
-	char* filecommand = malloc(sizeof(char)*200);
+	char command[200];
+	char filecommand[200];
 	strcpy(filecommand,"cd ");
 	strcat(filecommand,upstream_path);
 	strcat(filecommand," && git diff-tree --no-commit-id --name-only -r bd40b17ca49d7d110adf456e647701ce74de2241\0");
@@ -721,10 +722,10 @@ void* check_rhel_log(void* arg){
 	strcat(command, " && git log --grep=\"bd40b17ca49d7d110adf456e647701ce74de2241\" -- \0");
 	//printf("thread started");
 	pthread_mutex_lock(&lock);
-	while(thread_index < fixes.size){
-		fix = get_fix(fixes, thread_index);
+	while(*thread_index < fixes.size){
+		fix = get_fix(fixes, *thread_index);
 		//printf("%d / %d\n", thread_index+1, fixes.size);
-		thread_index++;
+		(*thread_index)++;
 		pthread_mutex_unlock(&lock);
 		create_file(filecommand, fix->id);
 		output = popen(filecommand, "r");
@@ -745,8 +746,6 @@ void* check_rhel_log(void* arg){
 		pthread_mutex_lock(&lock);
 	}
 	pthread_mutex_unlock(&lock);
-	free(command);
-	free(filecommand);
 	return NULL;
 }
 
@@ -859,8 +858,9 @@ int main(int argc, char *argv[])
 		pthread_t thread_pool[MAX_THREADS];
 		log_args_t thread_pool_args[MAX_THREADS];
 		int i;
+		int thread_index = 0;
 		for(i=0;i<MAX_THREADS;i++){
-			thread_pool_args[i] = (log_args_t){args.repo,upstream_repo,candidates};
+			thread_pool_args[i] = (log_args_t){args.repo,upstream_repo,&thread_index,candidates};
 			pthread_create(&thread_pool[i],NULL,check_rhel_log,&thread_pool_args[i]);
 		}
 		for(i=0;i<MAX_THREADS;i++){
