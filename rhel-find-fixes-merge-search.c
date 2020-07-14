@@ -340,91 +340,6 @@ static char *__strdup(const char *string)
 	return strndup(string, size);
 }
 
-static void load_upstream_fixes(const char *repo_dir,
-				const char *range, list_t *list)
-{
-	int ret;
-	git_repository *repo;
-	git_revwalk *walker;
-	git_oid oid;
-
-	//printf("Inside load_upstream");
-	git_libgit2_init();
-	//git_libgit2_opts(GIT_OPT_ENABLE_CACHING,1);
-	ret = git_repository_open(&repo, repo_dir);
-	if (ret < 0)
-		GIT_ERROR_EXIT("git_repository_open");
-
-	ret = git_revwalk_new(&walker, repo);
-	if (ret < 0)
-		GIT_ERROR_EXIT("git_revwalk_new");
-
-	/*
-	 * Be sure we'll be walking the history of the master branch,
-	 * as it's not always guranteed it is the one checked out
-	 * at the git_repository_open() time.
-	 */
-	ret = git_revwalk_push_ref(walker, "refs/heads/master");
-	if (ret < 0)
-		GIT_ERROR_EXIT("git_revwalk_push_ref");
-
-	ret = git_revwalk_push_range(walker, range);
-	if (ret < 0)
-		GIT_ERROR_EXIT("git_revwalk_push_range");
-
-	git_revwalk_sorting(walker, GIT_SORT_TIME | GIT_SORT_REVERSE);
-
-	while (git_revwalk_next(&oid, walker) == 0) {
-		char *str;
-		size_t len;
-		git_oid aux;
-		git_commit *c = NULL;
-		git_commit *commit = NULL;
-		upstream_data_t *upstream;
-		commit_data_t *fix;
-
-		ret = git_commit_lookup(&commit, repo, &oid);
-		if (ret < 0) {
-			GIT_ERROR_DEBUG("git_commit_lookup");
-			continue;
-		}
-
-		/* TODO: refactor this to grab multiple Fixes tags, if it's the case */
-		if ((str = regex_match(&fixes_re,
-					git_commit_message(commit))) == NULL)
-			goto next;
-
-		if ((len = strlen(str)) < 4)
-			goto next;
-
-		if ((ret = git_oid_fromstrp(&aux, str)) != 0)
-			goto next;
-
-		if ((ret = git_commit_lookup_prefix(&c, repo, &aux, len)) != 0)
-			goto next;
-
-		fix = calloc(1, sizeof(commit_data_t));
-		fix->id = __strdup(git_oid_tostr_s(git_commit_id(commit)));
-		fix->summary = __strdup(git_commit_summary(commit));
-
-		upstream = calloc(1, sizeof(upstream_data_t));
-		upstream->commit.id = __strdup(git_oid_tostr_s(git_commit_id(c)));
-		upstream->commit.summary = __strdup(git_commit_summary(c));
-		upstream->fix = fix;
-
-		list_add_tail(list, upstream);
-
-		git_commit_free(c);
-next:
-		git_commit_free(commit);
-		free(str);
-	}
-
-	git_revwalk_free(walker);
-	git_repository_free(repo);
-	git_libgit2_shutdown();
-}
-
 /* if set, limits rhel_load_data() commit list to the specified paths */
 static int path_match = 0;
 git_diff_options diffopts = GIT_DIFF_OPTIONS_INIT;
@@ -494,6 +409,94 @@ bool commit_modifies_paths(git_diff_options *diffopts, git_commit *commit)
 	git_commit_free(parent);
 	return modified;
 }
+static void load_upstream_fixes(const char *repo_dir,
+				const char *range, list_t *list)
+{
+	int ret;
+	git_repository *repo;
+	git_revwalk *walker;
+	git_oid oid;
+
+	//printf("Inside load_upstream");
+	git_libgit2_init();
+	//git_libgit2_opts(GIT_OPT_ENABLE_CACHING,1);
+	ret = git_repository_open(&repo, repo_dir);
+	if (ret < 0)
+		GIT_ERROR_EXIT("git_repository_open");
+
+	ret = git_revwalk_new(&walker, repo);
+	if (ret < 0)
+		GIT_ERROR_EXIT("git_revwalk_new");
+
+	/*
+	 * Be sure we'll be walking the history of the master branch,
+	 * as it's not always guranteed it is the one checked out
+	 * at the git_repository_open() time.
+	 */
+	ret = git_revwalk_push_ref(walker, "refs/heads/master");
+	if (ret < 0)
+		GIT_ERROR_EXIT("git_revwalk_push_ref");
+
+	ret = git_revwalk_push_range(walker, range);
+	if (ret < 0)
+		GIT_ERROR_EXIT("git_revwalk_push_range");
+
+	git_revwalk_sorting(walker, GIT_SORT_TIME | GIT_SORT_REVERSE);
+
+	while (git_revwalk_next(&oid, walker) == 0) {
+		char *str;
+		size_t len;
+		git_oid aux;
+		git_commit *c = NULL;
+		git_commit *commit = NULL;
+		upstream_data_t *upstream;
+		commit_data_t *fix;
+
+		ret = git_commit_lookup(&commit, repo, &oid);
+		if (ret < 0) {
+			GIT_ERROR_DEBUG("git_commit_lookup");
+			continue;
+		}
+
+		if (path_match && !commit_modifies_paths(&diffopts, commit))
+			goto next;
+
+		/* TODO: refactor this to grab multiple Fixes tags, if it's the case */
+		if ((str = regex_match(&fixes_re,
+					git_commit_message(commit))) == NULL)
+			goto next;
+
+		if ((len = strlen(str)) < 4)
+			goto next;
+
+		if ((ret = git_oid_fromstrp(&aux, str)) != 0)
+			goto next;
+
+		if ((ret = git_commit_lookup_prefix(&c, repo, &aux, len)) != 0)
+			goto next;
+
+		fix = calloc(1, sizeof(commit_data_t));
+		fix->id = __strdup(git_oid_tostr_s(git_commit_id(commit)));
+		fix->summary = __strdup(git_commit_summary(commit));
+
+		upstream = calloc(1, sizeof(upstream_data_t));
+		upstream->commit.id = __strdup(git_oid_tostr_s(git_commit_id(c)));
+		upstream->commit.summary = __strdup(git_commit_summary(c));
+		upstream->fix = fix;
+
+		list_add_tail(list, upstream);
+		free(str);
+		git_commit_free(c);
+next:
+		git_commit_free(commit);
+	}
+
+	git_revwalk_free(walker);
+	git_repository_free(repo);
+	git_libgit2_shutdown();
+}
+
+
 
 static void load_rhel_backports(const char *repo_dir, const char *range, list_t *list)
 {
@@ -874,7 +877,9 @@ int main(int argc, char *argv[])
 	list_destroy(&candidates);
 	pthread_mutex_destroy(&lock);
 	free_regular_expressions();
-	
+	free(upstream_repo);
+	free(args.repo);
+	free(range);	
 	time_t end = time(0);
 	printf("%lu\n", (unsigned long)end - (unsigned long)start);
 	
